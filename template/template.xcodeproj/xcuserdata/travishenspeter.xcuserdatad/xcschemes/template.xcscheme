@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F265750D1BFCF85D00572543"
-               BuildableName = "libtemplate.dylib"
+               BuildableName = "template.pd_darwin"
                BlueprintName = "template"
                ReferencedContainer = "container:template.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F265750D1BFCF85D00572543"
-            BuildableName = "libtemplate.dylib"
+            BuildableName = "template.pd_darwin"
             BlueprintName = "template"
             ReferencedContainer = "container:template.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F265750D1BFCF85D00572543"
-            BuildableName = "libtemplate.dylib"
+            BuildableName = "template.pd_darwin"
             BlueprintName = "template"
             ReferencedContainer = "container:template.xcodeproj">
          </BuildableReference>

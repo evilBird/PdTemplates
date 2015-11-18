@@ -7,7 +7,6 @@
 //
 //  Template for DSP Pd External. Signal panner.
 
-#include <stdio.h>
 #include "m_pd.h"
 
 static t_class *template_tilde_class;
@@ -24,7 +23,7 @@ typedef struct _template_tilde {
 
 // Perform routine is main DSP processing
 
-t_int *template_tilde_perform(t_int *w)
+static t_int *template_tilde_perform(t_int *w)
 {
     t_template_tilde *x = (t_template_tilde *)(w[1]);
     t_sample  *in1 =    (t_sample *)(w[2]);
@@ -40,7 +39,7 @@ t_int *template_tilde_perform(t_int *w)
 
 //Declare dsp methods to be added to the processing graph
 
-void template_tilde_dsp(t_template_tilde *x, t_signal **sp)
+static void template_tilde_dsp(t_template_tilde *x, t_signal **sp)
 {
     dsp_add(template_tilde_perform, 5, x,
             sp[0]->s_vec, sp[1]->s_vec, sp[2]->s_vec, sp[0]->s_n);
@@ -48,7 +47,7 @@ void template_tilde_dsp(t_template_tilde *x, t_signal **sp)
 
 // Destructor
 
-void template_tilde_free(t_template_tilde *x)
+static void template_tilde_free(t_template_tilde *x)
 {
     inlet_free(x->x_in2);
     inlet_free(x->x_in3);
@@ -57,7 +56,7 @@ void template_tilde_free(t_template_tilde *x)
 
 // Instantiates an instance of the class
 
-void *template_tilde_new(t_floatarg f)
+static void *template_tilde_new(t_floatarg f)
 {
     t_template_tilde *x = (t_template_tilde *)pd_new(template_tilde_class);
     
@@ -74,12 +73,16 @@ void *template_tilde_new(t_floatarg f)
 
 void template_tilde_setup(void) {
     template_tilde_class = class_new(gensym("template~"),
-                                (t_newmethod)template_tilde_new,
-                                0, sizeof(t_template_tilde),
-                                CLASS_DEFAULT,
-                                A_DEFFLOAT, 0);
+                                     (t_newmethod)template_tilde_new,
+                                     (t_method)template_tilde_free,
+                                     sizeof(t_template_tilde),
+                                     CLASS_DEFAULT,
+                                     A_DEFFLOAT,
+                                     0);
     
-    class_addmethod(template_tilde_class,  
-                    (t_method)template_tilde_dsp, gensym("dsp"), 0);  
-    CLASS_MAINSIGNALIN(template_tilde_class, t_template_tilde, f);  
+    class_addmethod(template_tilde_class,
+                    (t_method)template_tilde_dsp,
+                    gensym("dsp"),
+                    0);
+    CLASS_MAINSIGNALIN(template_tilde_class, t_template_tilde, f);
 }
